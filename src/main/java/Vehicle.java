@@ -31,6 +31,8 @@ public class Vehicle {
     int Burn = 0;
     int Flying = FLYING;
 
+    int Status = 0;
+
     public Vehicle() {}
 
     public String checkFinalStatus() {
@@ -70,8 +72,8 @@ public class Vehicle {
         Burn = burnAmount;
         Altitude = PrevAltitude;
         Velocity = computeDeltaV();
-        Altitude = Altitude - Velocity;
-        Fuel = Fuel - Burn;
+        Altitude -= Velocity;
+        Fuel -= Burn;
     }
 
     public boolean stillFlying() {
@@ -92,7 +94,7 @@ public class Vehicle {
     public DescentEvent getStatus(int tick) {
         // create a return a new DescentEvent object
         // filled in with the state of the vehicle.
-        DescentEvent de = new DescentEvent(tick, Velocity, Altitude, Flying, Fuel);
+        DescentEvent de = new DescentEvent(tick, Velocity, Fuel, Altitude, Status);
         return de;
     }
 
